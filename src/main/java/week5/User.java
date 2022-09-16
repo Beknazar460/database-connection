@@ -1,30 +1,19 @@
+package week5;
+
 import java.sql.*;
 
-public class JDBC extends Configs{
+public class User {
+
     static Connection dbConnection;
     static Statement dbStatment;
     static ResultSet resultSet;
 
-    public static void main(String[] args) {
-//        signUpUser("2", "24", "Beknazar", "Abdykalykuulu", "beknazarabdykalykuulu@gmail.com", "+996555439317");
-//        selectUser();
-        removeUser();
-    }
-    public static Connection getDbConnection() throws ClassNotFoundException, SQLException{
-        String connectionUrl = "jdbc:mysql://localhost:3306/example";
-
-        Class.forName("com.mysql.jdbc.Driver");
-
-        dbConnection = DriverManager.getConnection(connectionUrl, DB_USER, DB_PASS);
-        return dbConnection;
-    }
-
     public static void signUpUser(String id, String age, String firstName, String lastName, String email, String phone) {
         String insert = "INSERT INTO " + Const.USER_TABLE + "(" + Const.USERS_ID + "," + Const.USERS_AGE + "," + Const.USERS_FIRSTNAME + "," +
-                                        Const.USERS_LASTNAME + "," + Const.USERS_EMAIL + "," + Const.USERS_PHONE + ")" +
-                                        "VALUES(?,?,?,?,?,?)";
+                Const.USERS_LASTNAME + "," + Const.USERS_EMAIL + "," + Const.USERS_PHONE + ")" +
+                "VALUES(?,?,?,?,?,?)";
         try {
-            PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+            PreparedStatement prSt = JDBC.getDbConnection().prepareStatement(insert);
             prSt.setString(1, id);
             prSt.setString(2, age);
             prSt.setString(3, firstName);
@@ -48,7 +37,7 @@ public class JDBC extends Configs{
         String select = "SELECT * FROM " + Const.USER_TABLE;
 
         try {
-            dbStatment = getDbConnection().createStatement();
+            dbStatment = JDBC.getDbConnection().createStatement();
             resultSet = dbStatment.executeQuery(select);
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
@@ -58,11 +47,24 @@ public class JDBC extends Configs{
                 String email = resultSet.getString(5);
                 String phone = resultSet.getString(6);
 
-                System.out.printf("%d, %d, %s, %s, %s, %s", id, age, firstName, lastName, email, phone);
+                System.out.printf("%d, %d, %s, %s, %s, %s%n", id, age, firstName, lastName, email, phone);
             }
             resultSet.close();
             dbStatment.close();
-            dbConnection.close();
+            JDBC.dbConnection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateUser() {
+        String update = "UPDATE Users SET first_name = 'Kubatbek'";
+
+        try {
+            dbStatment = JDBC.getDbConnection().createStatement();
+            dbStatment.executeUpdate(update);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -74,7 +76,7 @@ public class JDBC extends Configs{
         String delete = "DELETE FROM Users WHERE id = 1";
 
         try {
-            dbStatment = getDbConnection().createStatement();
+            dbStatment = JDBC.getDbConnection().createStatement();
             dbStatment.executeUpdate(delete);
 
             dbStatment.close();
@@ -85,5 +87,4 @@ public class JDBC extends Configs{
             e.printStackTrace();
         }
     }
-
 }

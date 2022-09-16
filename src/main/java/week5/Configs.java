@@ -1,3 +1,5 @@
+package week5;
+
 public class Configs {
     protected static final String DB_HOST = "localhost";
     protected static final String DB_NAME = "example";
