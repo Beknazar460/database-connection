@@ -4,8 +4,6 @@ import java.sql.*;
 
 public class JDBC extends Configs{
     static Connection dbConnection;
-    static Statement dbStatment;
-    static ResultSet resultSet;
 
     public static void main(String[] args) {
         User.signUpUser("1", "24", "Beknazar", "Abdykalykuulu", "beknazarabdykalykuulu@gmail.com", "+996555439317");
@@ -16,7 +14,7 @@ public class JDBC extends Configs{
         User.selectUser();
     }
     public static Connection getDbConnection() throws ClassNotFoundException, SQLException{
-        String connectionUrl = "jdbc:mysql://localhost:3306/example";
+        String connectionUrl = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
 
         Class.forName("com.mysql.jdbc.Driver");
 

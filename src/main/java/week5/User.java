@@ -2,9 +2,10 @@ package week5;
 
 import java.sql.*;
 
+import static week5.JDBC.dbConnection;
+
 public class User {
 
-    static Connection dbConnection;
     static Statement dbStatment;
     static ResultSet resultSet;
 
@@ -51,7 +52,7 @@ public class User {
             }
             resultSet.close();
             dbStatment.close();
-            JDBC.dbConnection.close();
+            dbConnection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
