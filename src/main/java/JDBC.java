@@ -6,8 +6,9 @@ public class JDBC extends Configs{
     static ResultSet resultSet;
 
     public static void main(String[] args) {
-        //signUpUser("1", "24", "Beknazar", "Abdykalykuulu", "beknazarabdykalykuulu@gmail.com", "+996555439317");
-        selectUser();
+//        signUpUser("2", "24", "Beknazar", "Abdykalykuulu", "beknazarabdykalykuulu@gmail.com", "+996555439317");
+//        selectUser();
+        removeUser();
     }
     public static Connection getDbConnection() throws ClassNotFoundException, SQLException{
         String connectionUrl = "jdbc:mysql://localhost:3306/example";
@@ -19,7 +20,7 @@ public class JDBC extends Configs{
     }
 
     public static void signUpUser(String id, String age, String firstName, String lastName, String email, String phone) {
-        String insert = "INSERT INTO" + Const.USER_TABLE + "(" + Const.USERS_ID + "," + Const.USERS_AGE + "," + Const.USERS_FIRSTNAME + "," +
+        String insert = "INSERT INTO " + Const.USER_TABLE + "(" + Const.USERS_ID + "," + Const.USERS_AGE + "," + Const.USERS_FIRSTNAME + "," +
                                         Const.USERS_LASTNAME + "," + Const.USERS_EMAIL + "," + Const.USERS_PHONE + ")" +
                                         "VALUES(?,?,?,?,?,?)";
         try {
@@ -68,4 +69,21 @@ public class JDBC extends Configs{
             e.printStackTrace();
         }
     }
+
+    public static void removeUser() {
+        String delete = "DELETE FROM Users WHERE id = 1";
+
+        try {
+            dbStatment = getDbConnection().createStatement();
+            dbStatment.executeUpdate(delete);
+
+            dbStatment.close();
+            dbConnection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
