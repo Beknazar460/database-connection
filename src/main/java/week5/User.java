@@ -9,6 +9,7 @@ public class User {
     static Statement dbStatment;
     static ResultSet resultSet;
 
+    //Insert operation
     public static void signUpUser(String id, String age, String firstName, String lastName, String email, String phone) {
         String insert = "INSERT INTO " + Const.USER_TABLE + "(" + Const.USERS_ID + "," + Const.USERS_AGE + "," + Const.USERS_FIRSTNAME + "," +
                 Const.USERS_LASTNAME + "," + Const.USERS_EMAIL + "," + Const.USERS_PHONE + ")" +
@@ -34,6 +35,7 @@ public class User {
 
     }
 
+    // Select operation
     public static void selectUser() {
         String select = "SELECT * FROM " + Const.USER_TABLE;
 
@@ -60,6 +62,7 @@ public class User {
         }
     }
 
+    //Update operation
     public static void updateUser() {
         String update = "UPDATE Users SET first_name = 'Kubatbek'";
 
@@ -73,6 +76,7 @@ public class User {
         }
     }
 
+    //Delete operation
     public static void removeUser() {
         String delete = "DELETE FROM Users WHERE id = 1";
 

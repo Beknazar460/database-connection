@@ -1,5 +1,6 @@
 package week5;
 
+// Константные значения столбцов таблицы Users
 public class Const {
     public static final String USER_TABLE = "users";
 

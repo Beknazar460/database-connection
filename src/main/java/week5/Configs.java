@@ -1,5 +1,6 @@
 package week5;
 
+//Константные значения для подключения в бд
 public class Configs {
     protected static final String DB_HOST = "localhost";
     protected static final String DB_NAME = "example";

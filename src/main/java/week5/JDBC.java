@@ -13,6 +13,8 @@ public class JDBC extends Configs{
         User.removeUser();
         User.selectUser();
     }
+
+    //Connection to daata base
     public static Connection getDbConnection() throws ClassNotFoundException, SQLException{
         String connectionUrl = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
 
